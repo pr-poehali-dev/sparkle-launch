@@ -1,3 +1,7 @@
-# sparkle-launch
+# Минималистичный Waitlist
 
-Initial repository setup for pr-poehali-dev/sparkle-launch
+![Preview](preview.png)
+
+Элегантная страница листа ожидания с анимированным mesh-градиентом на фоне. Включает форму подписки на email, переключатель темы (светлая/темная/авто) и футер с копирайтом. Идеально подходит для анонса запуска продукта или сбора заявок на ранний доступ.
+
+`"tags": ["waitlist", "gradient", "dark", "light", "minimal"]`
