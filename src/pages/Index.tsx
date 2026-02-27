@@ -1,21 +1,13 @@
 import { ThemeProvider } from "next-themes";
 import {
-  WaitlistForm,
   WaitlistWrapper,
   MeshGradient,
 } from "@/components/waitlist";
+import { useAuth } from "@/context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Index = () => {
-  const handleSubmit = async (
-    email: string
-  ): Promise<{ success: boolean; error?: string }> => {
-    // Simulate API call
-    console.log("Submitting email:", email);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // Demo: always succeed
-    return { success: true };
-  };
+  const { user, loading } = useAuth();
 
   return (
     <ThemeProvider
@@ -57,16 +49,29 @@ const Index = () => {
                     эксклюзивные обновления.
                   </p>
                 </div>
-                <div className="px-1 flex flex-col w-full self-stretch">
-                  <WaitlistForm
-                    onSubmit={handleSubmit}
-                    placeholder="Введите email"
-                    buttonCopy={{
-                      idle: "Записаться",
-                      loading: "Отправка...",
-                      success: "Готово!",
-                    }}
-                  />
+                <div className="px-1 flex flex-col w-full self-stretch gap-3">
+                  {!loading && (
+                    user ? (
+                      <Link
+                        to={user.is_admin ? "/admin" : "/dashboard"}
+                        className="h-11 px-4 bg-gray-12 text-gray-1 text-sm rounded-full font-medium flex items-center justify-center"
+                      >
+                        {user.is_admin ? "Панель администратора" : "Личный кабинет"}
+                      </Link>
+                    ) : (
+                      <div className="flex flex-col gap-2">
+                        <Link
+                          to="/auth"
+                          className="h-11 px-4 bg-gray-12 text-gray-1 text-sm rounded-full font-medium flex items-center justify-center"
+                        >
+                          Войти / Зарегистрироваться
+                        </Link>
+                        <p className="text-xs text-slate-10 text-center">
+                          Войдите, чтобы отправить обращение
+                        </p>
+                      </div>
+                    )
+                  )}
                 </div>
               </WaitlistWrapper>
             </main>

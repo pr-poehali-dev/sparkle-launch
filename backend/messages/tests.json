@@ -1,0 +1,10 @@
+{
+  "tests": [
+    {
+      "name": "Messages health check",
+      "method": "GET",
+      "path": "/",
+      "expectedStatus": 404
+    }
+  ]
+}
